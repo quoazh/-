@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+}
+
+header {
+  background-color: #007bff;
+  padding: 10px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header .nav {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+header .nav li {
+  margin: 0 15px;
+  display: flex;
+  align-items: center;
+}
+
+header .nav li a, #logButton {
+  text-decoration: none;
+  color: white;
+  padding: 8px 15px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+header .nav li a:hover, #logButton:hover {
+  background-color: #0056b3;
+}
+
+main {
+  max-width: 800px;
+  margin: 50px auto;
+  text-align: center;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+main h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #007bff;
+}
+
+main p {
+  font-size: 1.2em;
+  line-height: 1.6;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #333;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  header .nav {
+    flex-direction: column;
+  }
+
+  header .nav li {
+    margin: 5px 0;
+  }
+
+  main {
+    margin: 20px;
+    padding: 15px;
+  }
+}

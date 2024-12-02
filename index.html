@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="assets/icon-diary.png" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+  <title>Главная страница</title>
+</head>
+<body>
+  <header>
+    <ul class="nav">
+      <li><a href="./pages/read.html">Читать записи</a></li>
+      <li><a href="./pages/create.html">Создать запись</a></li>
+      <li><a href="./pages/update.html">Изменить запись</a></li>
+      <li id="regAv"><a href="./pages/reg.html">Регистрация</a>/<a href="./pages/login.html">Авторизация</a></li>
+      <li id="logOut"><button id="logButton">Выйти</button></li>
+    </ul>
+  </header>
+  <main>
+    <h1>Добро пожаловать в цифровой дневник!</h1>
+    <p>Записывайте свои мысли и идеи, а затем читайте или редактируйте их в любое время.</p>
+  </main>
+  <footer></footer>
+</body>
+<script type="module" src="script.js"></script>
+<script type="module" src="./api-methods/isAuth.js"></script>
+</html>

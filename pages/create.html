@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../assets/icon-diary.png" type="image/x-icon">
+  <link rel="stylesheet" href="../styles/create.css">
+  <title>Страница записи</title>
+</head>
+<body>
+  <form>
+    <input type="text" id="title" placeholder="title">
+    <input type="text" id="paragraph" placeholder="paragraph">
+    <select name="category" id="category">
+      <option value="Отлично">Отлично</option>
+      <option value="Хорошо">Хорошо</option>
+      <option value="Нормально">Нормально</option>
+      <option value="Плохо">Плохо</option>
+      <option value="Ужасно">Ужасно</option>
+    </select>
+  </form>
+  <button id="submitButton">Отправить</button>
+</body>
+<script type="module" src="../api-methods/post.js"></script>
+</html>

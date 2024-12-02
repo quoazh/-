@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding-top: 20px;
+}
+
+.diary-read-container {
+  width: 90%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.diary-entry {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.diary-entry:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.diary-entry h2 {
+  margin: 0 0 10px;
+  font-size: 1.5em;
+  color: #007bff;
+}
+
+.diary-entry p {
+  margin: 0 0 10px;
+  font-size: 1em;
+  line-height: 1.6;
+  color: #555;
+}
+
+.diary-entry .category {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-size: 0.9em;
+  color: white;
+  border-radius: 5px;
+  background-color: #007bff;
+  text-transform: capitalize;
+}
+
+.diary-entry .category[data-category="Отлично"] {
+  background-color: #28a745;
+}
+
+.diary-entry .category[data-category="Хорошо"] {
+  background-color: #ffc107;
+}
+
+.diary-entry .category[data-category="Нормально"] {
+  background-color: #17a2b8;
+}
+
+.diary-entry .category[data-category="Плохо"] {
+  background-color: #dc3545;
+}
+
+.diary-entry .category[data-category="Ужасно"] {
+  background-color: #6c757d;
+}
