@@ -3,12 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="assets/icon-diary.png" type="image/x-icon">
   <link rel="stylesheet" href="../styles/read.css">
-  <title>Страница чтение</title>
+  <title>Страница чтения</title>
 </head>
 <body>
-  <div class="diary-read-container"></div>
+  <main>
+    <div class="filters">
+      <input type="text" id="search-input" placeholder="Поиск по названию..." />
+      <select id="category-filter">
+        <option value="">Все категории</option>
+        <option value="Отлично">Отлично</option>
+        <option value="Хорошо">Хорошо</option>
+        <option value="Нормально">Нормально</option>
+        <option value="Плохо">Плохо</option>
+        <option value="Ужасно">Ужасно</option>
+      </select>
+      <button id="toggle-order">Старые записи</button>
+      <button id="apply-filters">Применить</button>
+    </div>
+    <div class="diary-read-container"></div>
+  </main>
+  <script type="module" src="../api-methods/get.js"></script>
 </body>
-<script type="module" src="../api-methods/get.js"></script>
 </html>

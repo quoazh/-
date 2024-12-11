@@ -1,31 +1,40 @@
 import { apiUrl, token } from "../script.js";
 
 const diaryContainer = document.querySelector('.diary-read-container');
-let diaryEntries = [];
+const toggleOrderButton = document.getElementById('toggle-order');
+const applyFiltersButton = document.getElementById('apply-filters');
+const searchInput = document.getElementById('search-input');
+const categoryFilter = document.getElementById('category-filter');
 
-export async function fetchDiaryGet() {
+let isDescending = false; // Переменная для отслеживания состояния сортировки
+
+// Функция для получения записей с фильтрацией
+async function fetchDiaryEntries({ search = '', category = '', orderBy = 'asc' } = {}) {
   try {
-    const resp = await fetch(`${apiUrl}/get`, {
+    const queryParams = new URLSearchParams({
+      search,
+      category,
+      orderBy,
+    });
+
+    const resp = await fetch(`${apiUrl}/get?${queryParams}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
+
     if (!resp.ok) {
       throw new Error(`Ошибка HTTP: ${resp.status}`);
     }
 
     const data = await resp.json();
-    diaryEntries = data;
-    displayDiaryGet(data);
+    displayDiaryEntries(data);
   } catch (error) {
     console.error('Ошибка при получении данных:', error);
-    diaryContainer.innerHTML = '<p>Нет записей</p>';
+    diaryContainer.innerHTML = '<p>Ошибка загрузки данных</p>';
   }
 }
 
-export async function getDiaryEntries() {
-  return diaryEntries;
-}
-
-function displayDiaryGet(entries) {
+// Функция для отображения записей
+function displayDiaryEntries(entries) {
   diaryContainer.innerHTML = '';
 
   entries.forEach(entry => {
@@ -43,4 +52,25 @@ function displayDiaryGet(entries) {
   });
 }
 
-fetchDiaryGet();
+// Обработчик для кнопки переключения
+toggleOrderButton.addEventListener('click', () => {
+  isDescending = !isDescending; // Меняем порядок
+  const orderBy = isDescending ? 'desc' : 'asc'; // Выбираем сортировку
+  toggleOrderButton.textContent = isDescending ? 'Новые записи' : 'Старые записи';
+
+  const search = searchInput.value.trim();
+  const category = categoryFilter.value;
+  fetchDiaryEntries({ search, category, orderBy });
+});
+
+// Обработчик для применения фильтров
+applyFiltersButton.addEventListener('click', () => {
+  const search = searchInput.value.trim();
+  const category = categoryFilter.value;
+  const orderBy = isDescending ? 'desc' : 'asc';
+
+  fetchDiaryEntries({ search, category, orderBy });
+});
+
+// Начальная загрузка
+fetchDiaryEntries();

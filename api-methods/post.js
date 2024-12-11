@@ -11,13 +11,14 @@ async function fetchDiaryPost() {
       body: JSON.stringify({
         title: document.getElementById('title').value,
         paragraph: document.getElementById('paragraph').value,
-        date: new Date().toLocaleString('ru-RU', {timeZone: 'Europe/Moscow', hour12: true}),
+        date: new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', hour12: true }),
         category: document.getElementById('category').value
       })
     });
 
     const data = await resp.json();
     console.log('Успешно:', data);
+    window.location.href = 'http://127.0.0.1:5500/index.html';
   } catch (error) {
     console.error('Ошибка', error);
   }
