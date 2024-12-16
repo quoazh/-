@@ -1,15 +1,25 @@
 import { apiUrl, token } from "../script.js";
 
-const diaryContainer = document.querySelector('.diary-read-container');
-const toggleOrderButton = document.getElementById('toggle-order');
-const applyFiltersButton = document.getElementById('apply-filters');
-const searchInput = document.getElementById('search-input');
-const categoryFilter = document.getElementById('category-filter');
+// Функция для получения всех записей
+export async function fetchDiaryGet() {
+  try {
+    const resp = await fetch(`${apiUrl}/get`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
-let isDescending = false; // Переменная для отслеживания состояния сортировки
+    if (!resp.ok) {
+      throw new Error(`Ошибка HTTP: ${resp.status}`);
+    }
 
-// Функция для получения записей с фильтрацией
-async function fetchDiaryEntries({ search = '', category = '', orderBy = 'asc' } = {}) {
+    return await resp.json(); // Возвращаем данные
+  } catch (error) {
+    console.error('Ошибка при получении данных:', error);
+    return []; // Возвращаем пустой массив в случае ошибки
+  }
+}
+
+// Функция для получения записей с параметрами поиска
+export async function fetchDiaryEntries({ search = '', category = '', orderBy = 'asc' } = {}) {
   try {
     const queryParams = new URLSearchParams({
       search,
@@ -34,7 +44,8 @@ async function fetchDiaryEntries({ search = '', category = '', orderBy = 'asc' }
 }
 
 // Функция для отображения записей
-function displayDiaryEntries(entries) {
+export function displayDiaryEntries(entries) {
+  const diaryContainer = document.querySelector('.diary-container');
   diaryContainer.innerHTML = '';
 
   entries.forEach(entry => {
@@ -51,26 +62,3 @@ function displayDiaryEntries(entries) {
     diaryContainer.appendChild(entryDiv);
   });
 }
-
-// Обработчик для кнопки переключения
-toggleOrderButton.addEventListener('click', () => {
-  isDescending = !isDescending; // Меняем порядок
-  const orderBy = isDescending ? 'desc' : 'asc'; // Выбираем сортировку
-  toggleOrderButton.textContent = isDescending ? 'Новые записи' : 'Старые записи';
-
-  const search = searchInput.value.trim();
-  const category = categoryFilter.value;
-  fetchDiaryEntries({ search, category, orderBy });
-});
-
-// Обработчик для применения фильтров
-applyFiltersButton.addEventListener('click', () => {
-  const search = searchInput.value.trim();
-  const category = categoryFilter.value;
-  const orderBy = isDescending ? 'desc' : 'asc';
-
-  fetchDiaryEntries({ search, category, orderBy });
-});
-
-// Начальная загрузка
-fetchDiaryEntries();

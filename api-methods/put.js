@@ -1,13 +1,12 @@
 import { apiUrl, token } from "../script.js";
-import { getDiaryEntries, fetchDiaryGet } from "./get.js";
+import { fetchDiaryGet } from './get.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  await fetchDiaryGet();
-
-  const entries = await getDiaryEntries();
+  const entries = await fetchDiaryGet(); // Получаем записи через функцию
   displayPutEntries(entries);
 });
 
+// Функция для отображения записей в выпадающем списке
 function displayPutEntries(entries) {
   const diaryList = document.querySelector('.diary-read-container');
 
@@ -16,8 +15,10 @@ function displayPutEntries(entries) {
   `).join('');
 }
 
+// Функция для обновления записи
 async function fetchDiaryPut() {
   const id = document.querySelector('.diary-read-container').value;
+
   try {
     const resp = await fetch(`${apiUrl}/put/${id}`, {
       method: 'PUT',
@@ -28,16 +29,24 @@ async function fetchDiaryPut() {
       body: JSON.stringify({
         title: document.getElementById('title').value,
         paragraph: document.getElementById('paragraph').value,
-        date: new Date().toLocaleString('ru-RU', {timeZone: 'Europe/Moscow', hour12: true}),
+        date: new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', hour12: true }),
         category: document.getElementById('category').value
       })
     });
 
     const data = await resp.json();
-    console.log('Успешно:', data);
+
+    if (!resp.ok) {
+      throw new Error(data.error || 'Не удалось обновить запись');
+    }
+
+    console.log('Успешно обновлено:', data);
+    alert('Запись обновлена успешно!');
   } catch (error) {
-    console.error('Ошибка', error);
+    console.error('Ошибка:', error);
+    alert('Не удалось обновить запись.');
   }
 }
 
+// Привязка функции к кнопке обновления
 document.getElementById('updateButton').addEventListener('click', fetchDiaryPut);
