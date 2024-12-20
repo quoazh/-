@@ -2,11 +2,10 @@ import { apiUrl, token } from "../script.js";
 import { fetchDiaryGet } from './get.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const entries = await fetchDiaryGet(); // Получаем записи через функцию
+  const entries = await fetchDiaryGet();
   displayPutEntries(entries);
 });
 
-// Функция для отображения записей в выпадающем списке
 function displayPutEntries(entries) {
   const diaryList = document.querySelector('.diary-read-container');
 
@@ -15,7 +14,6 @@ function displayPutEntries(entries) {
   `).join('');
 }
 
-// Функция для обновления записи
 async function fetchDiaryPut() {
   const id = document.querySelector('.diary-read-container').value;
 
@@ -48,5 +46,4 @@ async function fetchDiaryPut() {
   }
 }
 
-// Привязка функции к кнопке обновления
 document.getElementById('updateButton').addEventListener('click', fetchDiaryPut);

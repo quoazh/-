@@ -1,6 +1,5 @@
 import { apiUrl, token } from "../script.js";
 
-// Функция для получения всех записей
 export async function fetchDiaryGet() {
   try {
     const resp = await fetch(`${apiUrl}/get`, {
@@ -11,14 +10,13 @@ export async function fetchDiaryGet() {
       throw new Error(`Ошибка HTTP: ${resp.status}`);
     }
 
-    return await resp.json(); // Возвращаем данные
+    return await resp.json();
   } catch (error) {
     console.error('Ошибка при получении данных:', error);
-    return []; // Возвращаем пустой массив в случае ошибки
+    return [];
   }
 }
 
-// Функция для получения записей с параметрами поиска
 export async function fetchDiaryEntries({ search = '', category = '', orderBy = 'asc' } = {}) {
   try {
     const queryParams = new URLSearchParams({
@@ -43,7 +41,6 @@ export async function fetchDiaryEntries({ search = '', category = '', orderBy = 
   }
 }
 
-// Функция для отображения записей
 export function displayDiaryEntries(entries) {
   const diaryContainer = document.querySelector('.diary-container');
   diaryContainer.innerHTML = '';
